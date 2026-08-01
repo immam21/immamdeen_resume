@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Immamdeen S. — Site Reliability Engineer</title>
+<meta name="description" content="Immamdeen S. — Site Reliability Engineer, SRE Lead & India POC. 8+ years across Retail, E-commerce and BFSI, specializing in incident management, cloud operations and AI-driven automation.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Immamdeen S. — Site Reliability Engineer">
+<meta property="og:description" content="SRE Lead & India POC · Cloud, Deployment & AI-Driven Automation · 8+ years in production systems">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0A0E16;
+    --bg-alt: #0D1220;
+    --panel: #121828;
+    --panel-2: #161E33;
+    --border: #232C42;
+    --border-soft: #1A2136;
+    --text: #E7ECF7;
+    --text-dim: #93A0BD;
+    --text-faint: #5C6889;
+    --accent: #F2A63C;
+    --accent-dim: #C98A31;
+    --accent-soft: rgba(242,166,60,0.12);
+    --good: #38D399;
+    --good-soft: rgba(56,211,153,0.14);
+    --sev1: #EF5A5A;
+    --sev1-soft: rgba(239,90,90,0.14);
+    --sev2: #F2A63C;
+    --sev2-soft: rgba(242,166,60,0.14);
+    --display: 'Sora', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'IBM Plex Mono', monospace;
+    --radius: 14px;
+    --max: 1180px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(242,166,60,0.06), transparent 40%),
+      radial-gradient(circle at 88% 18%, rgba(56,211,153,0.05), transparent 40%);
+  }
+
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  ::selection{background:var(--accent-soft); color:var(--accent);}
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+    border-radius:4px;
+  }
+
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 28px;}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--accent);
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+  }
+
+  h1,h2,h3{font-family:var(--display); font-weight:700; letter-spacing:-0.01em; color:var(--text);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    border-bottom:1px solid transparent;
+    transition:background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease;
+  }
+  header.scrolled{
+    background:rgba(10,14,22,0.82);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:68px;
+  }
+  .brand{
+    font-family:var(--mono); font-weight:600; font-size:15px; color:var(--text);
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand .dot{
+    width:8px; height:8px; border-radius:50%; background:var(--good);
+    box-shadow:0 0 0 0 rgba(56,211,153,0.6);
+    animation:pulse 2.2s infinite;
+  }
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(56,211,153,0.55);}
+    70%{box-shadow:0 0 0 7px rgba(56,211,153,0);}
+    100%{box-shadow:0 0 0 0 rgba(56,211,153,0);}
+  }
+  .navlinks{display:flex; align-items:center; gap:34px;}
+  .navlinks a{
+    font-size:14px; color:var(--text-dim); font-weight:500;
+    transition:color .2s ease;
+  }
+  .navlinks a:hover{color:var(--text);}
+  .navcta{
+    font-family:var(--mono); font-size:13px; font-weight:500;
+    color:var(--bg); background:var(--accent);
+    padding:9px 16px; border-radius:8px;
+    transition:transform .15s ease, background .2s ease;
+  }
+  .navcta:hover{background:#f5b558; transform:translateY(-1px);}
+  .navtoggle{display:none; background:none; border:none; color:var(--text); cursor:pointer;}
+
+  @media (max-width:860px){
+    .navlinks{
+      position:fixed; top:68px; left:0; right:0;
+      background:rgba(10,14,22,0.98); backdrop-filter:blur(10px);
+      flex-direction:column; align-items:flex-start; gap:0;
+      padding:8px 28px 20px; border-bottom:1px solid var(--border-soft);
+      transform:translateY(-8px); opacity:0; pointer-events:none;
+      transition:opacity .2s ease, transform .2s ease;
+    }
+    .navlinks.open{transform:translateY(0); opacity:1; pointer-events:auto;}
+    .navlinks a{padding:12px 0; width:100%; border-bottom:1px solid var(--border-soft);}
+    .navlinks .navcta{margin-top:14px; text-align:center;}
+    .navtoggle{display:block;}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:168px 0 96px;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:56px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(38px,5vw,56px); line-height:1.05; margin:18px 0 14px;
+  }
+  .hero h1 span{color:var(--accent);}
+  .hero .role{
+    font-family:var(--mono); font-size:16px; color:var(--text-dim); margin-bottom:20px;
+  }
+  .hero p.lede{
+    color:var(--text-dim); font-size:16.5px; max-width:52ch; margin-bottom:34px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
+  .btn{
+    font-family:var(--mono); font-size:13.5px; font-weight:500;
+    padding:13px 22px; border-radius:9px;
+    display:inline-flex; align-items:center; gap:8px;
+    transition:transform .15s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn-primary{background:var(--accent); color:#191205;}
+  .btn-primary:hover{background:#f5b558; transform:translateY(-1px);}
+  .btn-ghost{border:1px solid var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-1px);}
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:0;
+    border-top:1px solid var(--border-soft);
+  }
+  .stat{padding:18px 18px 0 0;}
+  .stat:first-child{padding-left:0;}
+  .stat .num{
+    font-family:var(--mono); font-size:26px; font-weight:600; color:var(--text);
+  }
+  .stat .num .unit{color:var(--accent); font-size:20px;}
+  .stat .label{font-size:12.5px; color:var(--text-faint); margin-top:4px; line-height:1.3;}
+
+  @media (max-width:640px){
+    .stat-row{grid-template-columns:repeat(2,1fr); row-gap:22px;}
+    .stat{padding-right:14px;}
+  }
+
+  /* ---------- HERO DASHBOARD PANEL ---------- */
+  .panel{
+    background:linear-gradient(180deg,var(--panel),var(--bg-alt));
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .panel-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px; border-bottom:1px solid var(--border-soft);
+    background:rgba(255,255,255,0.015);
+  }
+  .panel-bar .chip{width:9px; height:9px; border-radius:50%; background:var(--border);}
+  .panel-bar .chip:nth-child(1){background:#EF5A5A;}
+  .panel-bar .chip:nth-child(2){background:#F2A63C;}
+  .panel-bar .chip:nth-child(3){background:#38D399;}
+  .panel-bar .url{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-faint);
+    margin-left:8px;
+  }
+  .panel-body{padding:22px 22px 24px;}
+  .panel-title{
+    display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;
+  }
+  .panel-title .t{font-family:var(--mono); font-size:12px; color:var(--text-faint); letter-spacing:.06em; text-transform:uppercase;}
+  .status-pill{
+    font-family:var(--mono); font-size:11px; font-weight:500;
+    color:var(--good); background:var(--good-soft);
+    padding:4px 10px; border-radius:20px;
+    display:inline-flex; align-items:center; gap:6px;
+  }
+  .status-pill i{width:6px; height:6px; border-radius:50%; background:var(--good);}
+
+  .uptime-grid{
+    display:grid; grid-template-columns:repeat(14,1fr); gap:4px; margin-bottom:18px;
+  }
+  .uptime-grid .cell{
+    aspect-ratio:1; border-radius:3px; background:var(--border-soft);
+  }
+  .uptime-caption{
+    font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    margin-bottom:22px;
+  }
+
+  .service-list{display:flex; flex-direction:column; gap:11px;}
+  .service-row{
+    display:flex; align-items:center; justify-content:space-between;
+    font-size:13px; color:var(--text-dim);
+    padding-bottom:11px; border-bottom:1px dashed var(--border-soft);
+  }
+  .service-row:last-child{border-bottom:none; padding-bottom:0;}
+  .service-row .name{display:flex; align-items:center; gap:9px; color:var(--text);}
+  .service-row .name i{width:7px; height:7px; border-radius:50%; background:var(--good); flex:none;}
+  .service-row .val{font-family:var(--mono); font-size:12px; color:var(--good);}
+
+  @media (max-width:940px){
+    .hero{grid-template-columns:1fr; padding-top:140px;}
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{padding:88px 0;}
+  .section-head{margin-bottom:40px; max-width:640px;}
+  .section-head h2{font-size:clamp(26px,3vw,34px); margin-top:12px;}
+  .section-head p{color:var(--text-dim); margin-top:12px; font-size:15.5px;}
+  .divider{border-top:1px solid var(--border-soft);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start;}
+  .about-grid p{color:var(--text-dim); font-size:16px; margin-bottom:16px;}
+  .about-grid strong{color:var(--text); font-weight:600;}
+  .now-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px;
+  }
+  .now-card .eyebrow{margin-bottom:12px;}
+  .now-card ul{list-style:none; display:flex; flex-direction:column; gap:13px;}
+  .now-card li{
+    font-size:14px; color:var(--text-dim); display:flex; gap:10px; align-items:flex-start;
+  }
+  .now-card li .tag{
+    font-family:var(--mono); font-size:10.5px; color:var(--accent);
+    background:var(--accent-soft); padding:3px 7px; border-radius:5px; flex:none; margin-top:1px;
+  }
+  @media (max-width:860px){.about-grid{grid-template-columns:1fr;}}
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+  }
+  .skill-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px; transition:transform .18s ease, border-color .18s ease;
+  }
+  .skill-card:hover{transform:translateY(-3px); border-color:var(--accent-dim);}
+  .skill-card .head{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .skill-card h3{font-family:var(--body); font-size:14.5px; font-weight:600; color:var(--text);}
+  .skill-card .status-pill{padding:3px 8px;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:7px;}
+  .tag{
+    font-family:var(--mono); font-size:11.5px; color:var(--text-dim);
+    background:var(--bg-alt); border:1px solid var(--border-soft);
+    padding:5px 9px; border-radius:6px;
+  }
+  @media (max-width:860px){.skills-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.skills-grid{grid-template-columns:1fr;}}
+
+  /* ---------- EXPERIENCE ---------- */
+  .timeline{position:relative; padding-left:28px;}
+  .timeline::before{
+    content:''; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--border);
+  }
+  .tl-item{
+    position:relative; padding-bottom:44px;
+    opacity:0; transform:translateY(14px);
+    transition:opacity .5s ease, transform .5s ease;
+  }
+  .tl-item.in{opacity:1; transform:translateY(0);}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:''; position:absolute; left:-28px; top:6px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--bg); border:2px solid var(--accent);
+  }
+  .tl-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:10px 14px; margin-bottom:6px;}
+  .tl-head h3{font-size:18px;}
+  .tl-badge{
+    font-family:var(--mono); font-size:10.5px; font-weight:600; letter-spacing:.04em;
+    padding:3px 8px; border-radius:5px; text-transform:uppercase;
+  }
+  .badge-lead{color:var(--accent); background:var(--accent-soft);}
+  .badge-eng{color:var(--good); background:var(--good-soft);}
+  .tl-meta{
+    font-family:var(--mono); font-size:12.5px; color:var(--text-faint); margin-bottom:6px;
+  }
+  .tl-stack{font-size:13.5px; color:var(--text-faint); font-style:italic; margin-bottom:14px;}
+  .tl-bullets{list-style:none; display:flex; flex-direction:column; gap:9px;}
+  .tl-bullets li{
+    font-size:14.5px; color:var(--text-dim); padding-left:18px; position:relative;
+  }
+  .tl-bullets li::before{
+    content:'▸'; position:absolute; left:0; color:var(--accent); font-size:12px; top:2px;
+  }
+  .tl-bullets b{color:var(--text); font-weight:600;}
+
+  /* ---------- ACHIEVEMENTS ---------- */
+  .kpi-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .kpi-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:22px;
+  }
+  .kpi-card .num{font-family:var(--mono); font-size:30px; font-weight:600; color:var(--accent);}
+  .kpi-card .desc{font-size:13.5px; color:var(--text-dim); margin-top:8px; line-height:1.5;}
+  @media (max-width:860px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.kpi-grid{grid-template-columns:1fr;}}
+
+  /* ---------- CREDENTIALS ---------- */
+  .cred-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .cred-card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px;
+  }
+  .cred-card h3{font-size:14px; font-weight:600; margin-bottom:14px; color:var(--text-dim); font-family:var(--mono); text-transform:uppercase; letter-spacing:.06em;}
+  .cred-row{display:flex; justify-content:space-between; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px dashed var(--border-soft);}
+  .cred-row:last-child{border-bottom:none;}
+  .cred-row .name{font-size:14px; color:var(--text);}
+  .cred-row .sub{font-size:12.5px; color:var(--text-faint); margin-top:2px;}
+  .cred-row .status{font-family:var(--mono); font-size:10.5px; padding:3px 8px; border-radius:5px; white-space:nowrap;}
+  .status-done{color:var(--good); background:var(--good-soft);}
+  .status-progress{color:var(--accent); background:var(--accent-soft);}
+  @media (max-width:760px){.cred-grid{grid-template-columns:1fr;}}
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    background:linear-gradient(135deg,var(--panel),var(--bg-alt));
+    border:1px solid var(--border); border-radius:20px;
+    padding:56px; text-align:center;
+  }
+  .contact-panel h2{font-size:clamp(26px,3.4vw,36px); margin-bottom:14px;}
+  .contact-panel p{color:var(--text-dim); max-width:52ch; margin:0 auto 30px; font-size:15.5px;}
+  .contact-links{display:flex; justify-content:center; gap:14px; flex-wrap:wrap;}
+
+  footer{padding:36px 0 48px; text-align:center;}
+  footer p{font-family:var(--mono); font-size:12px; color:var(--text-faint);}
+
+  @media (max-width:640px){
+    .contact-panel{padding:36px 22px;}
+    section{padding:64px 0;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav class="wrap">
+    <a href="#top" class="brand"><span class="dot"></span>IMMAMDEEN.S</a>
+    <div class="navlinks" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#credentials">Credentials</a>
+      <a href="resume.pdf" class="navcta" download>Résumé ↓</a>
+    </div>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap" style="padding-bottom:0;">
+    <div>
+      <span class="eyebrow"><span style="width:6px;height:6px;border-radius:50%;background:var(--good);display:inline-block;"></span>SYSTEM STATUS: OPERATIONAL</span>
+      <h1>Immamdeen S.<br>Site Reliability <span>Engineer</span></h1>
+      <div class="role">SRE Lead &amp; India POC · Cloud, Deployment &amp; AI-Driven Automation</div>
+      <p class="lede">8+ years keeping high-availability retail and e-commerce platforms stable — owning incident response, production deployments, and AI/LLM-driven automation across Walmart Global Tech and TCS.</p>
+      <div class="hero-ctas">
+        <a href="resume.pdf" class="btn btn-primary" download>Download Résumé</a>
+        <a href="mailto:immam2198@gmail.com" class="btn btn-ghost">Email Me</a>
+        <a href="https://linkedin.com/in/Immam21" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="num" data-count="8" data-suffix="+">0</div><div class="label">Years in production systems</div></div>
+        <div class="stat"><div class="num" data-count="30" data-suffix="%">0</div><div class="label">Faster incident response</div></div>
+        <div class="stat"><div class="num" data-count="35" data-suffix="+">0</div><div class="label">Hours saved / month via automation</div></div>
+        <div class="stat"><div class="num" style="font-size:20px;">SEV1–3</div><div class="label">Resolved within SLA</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-bar">
+        <span class="chip"></span><span class="chip"></span><span class="chip"></span>
+        <span class="url">sre-dashboard · immamdeen.s</span>
+      </div>
+      <div class="panel-body">
+        <div class="panel-title">
+          <span class="t">Production Uptime — Last 14 Weeks</span>
+          <span class="status-pill"><i></i>Healthy</span>
+        </div>
+        <div class="uptime-grid" id="uptimeGrid"></div>
+        <div class="uptime-caption">Weekly reliability snapshot · Sam's Club platforms</div>
+
+        <div class="service-list">
+          <div class="service-row"><span class="name"><i></i>Membership Express</span><span class="val">99.98%</span></div>
+          <div class="service-row"><span class="name"><i></i>In-Club Fresh Scales</span><span class="val">99.95%</span></div>
+          <div class="service-row"><span class="name"><i></i>Samsclub.com</span><span class="val">99.97%</span></div>
+          <div class="service-row"><span class="name"><i></i>MCP Automation Layer</span><span class="val">Active</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="wrap">
+    <div class="divider" style="margin-bottom:56px;"></div>
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">Profile</span>
+        <h2 style="margin:12px 0 20px;">Reliability is the product.</h2>
+        <p>I'm a Site Reliability Engineer with <strong>8+ years</strong> across Retail, E-commerce, and BFSI, currently the <strong>SRE Lead and primary India POC</strong> for Sam's Club's in-club and e-commerce platforms at Walmart Global Tech. My work spans incident and problem management, hands-on production deployments, and Git-based release workflows for systems that can't afford downtime.</p>
+        <p>Over the last two years I've focused on closing the gap between operations and AI tooling — building a custom <strong>MCP integration with 8 tools</strong> and using hands-on LLM experience (Claude, GitHub Copilot, OpenAI) to automate incident triage, log analysis, and reporting that used to take a team hours to do manually.</p>
+      </div>
+      <div class="now-card">
+        <span class="eyebrow">Currently</span>
+        <ul>
+          <li><span class="tag">LEAD</span> Acting SRE Lead &amp; India POC for Sam's Club platforms at Walmart Global Tech</li>
+          <li><span class="tag">BUILD</span> Extending an internal MCP server that automates incident triage &amp; reporting</li>
+          <li><span class="tag">LEARN</span> Pursuing a Python for GenAI program</li>
+          <li><span class="tag">CERT</span> Completed Microsoft Azure DevOps Engineer Expert (AZ-400)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="wrap">
+    <div class="divider" style="margin-bottom:56px;"></div>
+    <div class="section-head">
+      <span class="eyebrow">Toolchain</span>
+      <h2>Skills &amp; expertise</h2>
+      <p>The platforms, tools, and practices I operate in day to day — grouped the way I'd triage them on a real system.</p>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <div class="head"><h3>Cloud &amp; Platforms</h3><span class="status-pill"><i></i>Core</span></div>
+        <div class="tag-row">
+          <span class="tag">Microsoft Azure</span><span class="tag">Walmart WCNP</span><span class="tag">Google Cloud</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="head"><h3>Monitoring &amp; Observability</h3><span class="status-pill"><i></i>Core</span></div>
+        <div class="tag-row">
+          <span class="tag">Grafana</span><span class="tag">Splunk</span><span class="tag">AppDynamics</span><span class="tag">OpenObserve</span><span class="tag">MMS</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="head"><h3>AI &amp; LLM Tools</h3><span class="status-pill"><i></i>Active</span></div>
+        <div class="tag-row">
+          <span class="tag">Claude</span><span class="tag">GitHub Copilot</span><span class="tag">OpenAI</span><span class="tag">Windsurf</span><span class="tag">MCP Integration</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="head"><h3>Version Control &amp; Deployments</h3><span class="status-pill"><i></i>Core</span></div>
+        <div class="tag-row">
+          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">CI/CD Release Mgmt</span><span class="tag">Rollback Coordination</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="head"><h3>Programming &amp; Automation</h3><span class="status-pill"><i></i>Core</span></div>
+        <div class="tag-row">
+          <span class="tag">Core Java</span><span class="tag">Spring</span><span class="tag">Selenium</span><span class="tag">Shell Scripting</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="head"><h3>Database</h3><span class="status-pill"><i></i>Core</span></div>
+        <div class="tag-row">
+          <span class="tag">SQL</span><span class="tag">MySQL</span><span class="tag">CosmosDB</span><span class="tag">Firebase</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="head"><h3>Tools &amp; ITSM</h3><span class="status-pill"><i></i>Core</span></div>
+        <div class="tag-row">
+          <span class="tag">Jira</span><span class="tag">Confluence</span><span class="tag">ServiceNow</span><span class="tag">AutoSys</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <div class="head"><h3>SRE &amp; Operations Leadership</h3><span class="status-pill"><i></i>Lead</span></div>
+        <div class="tag-row">
+          <span class="tag">Incident Mgmt</span><span class="tag">Problem Mgmt</span><span class="tag">Change Mgmt</span><span class="tag">RCA / CoE</span><span class="tag">SME Leadership</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="wrap">
+    <div class="divider" style="margin-bottom:56px;"></div>
+    <div class="section-head">
+      <span class="eyebrow">Career log</span>
+      <h2>Experience</h2>
+      <p>Reverse-chronological, the way an incident timeline reads.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>Technology Services Engineer III</h3>
+          <span class="tl-badge badge-lead">SRE Lead · India POC</span>
+        </div>
+        <div class="tl-meta">Walmart Global Tech — Chennai · Aug 2022 – Present</div>
+        <div class="tl-stack">Azure · WCNP · Grafana · Splunk · AppDynamics · Java · Selenium · CosmosDB · ServiceNow</div>
+        <ul class="tl-bullets">
+          <li>Serving as <b>SRE Lead and primary India POC</b>, owning reliability strategy and coordinating with global stakeholders across time zones.</li>
+          <li>Acted as SME driving application stability, hands-on production releases, and operational excellence across in-club and e-commerce systems.</li>
+          <li>Built proactive Grafana/Splunk dashboards and alerts, reducing incident response time by <b>30%</b>.</li>
+          <li>Led resolution of <b>Sev1/Sev2</b> incidents, coordinating cross-functional CoE corrective and preventive actions.</li>
+          <li>Designed and built a custom <b>MCP server with 8 integrated tools</b>, using hands-on LLM development experience (Claude, GitHub Copilot, OpenAI) to automate incident triage, log analysis, and reporting.</li>
+          <li>Owned hands-on deployments and <b>Git-based release workflows</b>, performing sanity validations and rollback coordination across production releases.</li>
+          <li>Automated operational tasks using Selenium, Java, AI-assisted scripting, and MeshOS workflows, saving <b>35+ hours</b> of manual effort per month.</li>
+          <li>Recognized with the <b>Walmart Bravo Award</b> for managing a critical production incident to successful resolution.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-head">
+          <h3>Application L2/L3 Engineer</h3>
+          <span class="tl-badge badge-eng">Batch &amp; Production Ops</span>
+        </div>
+        <div class="tl-meta">Tata Consultancy Services — Chennai · July 2018 – Aug 2022</div>
+        <div class="tl-stack">AutoSys · Unix · SQL · Shell Scripting · ServiceNow</div>
+        <ul class="tl-bullets">
+          <li>Monitored critical batch jobs via AutoSys, ensuring timely execution of financial workflows for Citi's taxation portfolio.</li>
+          <li>Planned and executed month-end, quarter-end, and year-end batch cycles per business requirements.</li>
+          <li>Investigated and resolved batch job failures, minimizing downtime and ensuring business continuity.</li>
+          <li>Supported code deployments, bug fixes, incident/change management, and decommissioning impact analysis.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements" class="wrap">
+    <div class="divider" style="margin-bottom:56px;"></div>
+    <div class="section-head">
+      <span class="eyebrow">Impact</span>
+      <h2>Key achievements</h2>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="num">8 tools</div>
+        <div class="desc">Custom MCP server built to automate SRE workflows end-to-end, using hands-on LLM/AI experience.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num">35+ hrs</div>
+        <div class="desc">Saved per month through AI-assisted automation, MeshOS workflows, and Git-based deployment ownership.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num">Bravo</div>
+        <div class="desc">Walmart Bravo Award for Critical Incident Management Excellence.</div>
+      </div>
+      <div class="kpi-card">
+        <div class="num">3+ yrs</div>
+        <div class="desc">TCS Service &amp; Commitment Award, plus TCS On The Spot Award for Automation Tool Development.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREDENTIALS -->
+  <section id="credentials" class="wrap">
+    <div class="divider" style="margin-bottom:56px;"></div>
+    <div class="section-head">
+      <span class="eyebrow">Credentials</span>
+      <h2>Certifications &amp; education</h2>
+    </div>
+    <div class="cred-grid">
+      <div class="cred-card">
+        <h3>Certifications</h3>
+        <div class="cred-row">
+          <div><div class="name">Microsoft Certified: Azure DevOps Engineer Expert (AZ-400)</div></div>
+          <span class="status status-done">Completed</span>
+        </div>
+        <div class="cred-row">
+          <div><div class="name">Python for GenAI</div></div>
+          <span class="status status-progress">In progress</span>
+        </div>
+        <div class="cred-row">
+          <div><div class="name">Python for Beginners in Depth</div><div class="sub">Udemy, 2021</div></div>
+          <span class="status status-done">Completed</span>
+        </div>
+        <div class="cred-row">
+          <div><div class="name">Fundamentals of Digital Marketing</div><div class="sub">Google Digital Unlocked</div></div>
+          <span class="status status-done">Completed</span>
+        </div>
+      </div>
+
+      <div class="cred-card">
+        <h3>Education</h3>
+        <div class="cred-row">
+          <div>
+            <div class="name">Bachelor of Computer Applications (BCA)</div>
+            <div class="sub">Dr. SNS Rajalakshmi College of Arts and Science, Coimbatore</div>
+            <div class="sub">CGPA 7.9 · 2015 – 2018</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap">
+    <div class="contact-panel">
+      <span class="eyebrow">Open to opportunities</span>
+      <h2>Let's talk reliability.</h2>
+      <p>Open to Site Reliability Engineering and Cloud Operations roles. Reach out directly or grab a copy of my résumé.</p>
+      <div class="contact-links">
+        <a href="mailto:immam2198@gmail.com" class="btn btn-primary">immam2198@gmail.com</a>
+        <a href="tel:+919688772477" class="btn btn-ghost">+91 9688772477</a>
+        <a href="https://linkedin.com/in/Immam21" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="resume.pdf" class="btn btn-ghost" download>Résumé (PDF) ↓</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© <span id="year"></span> Immamdeen S. · Built &amp; deployed on Vercel</p>
+</footer>
+
+<script>
+  // Header scroll state
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 12);
+  }, { passive: true });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Uptime grid — deterministic "mostly healthy" pattern (not random each load)
+  const grid = document.getElementById('uptimeGrid');
+  const pattern = [3,3,3,3,2,3,3,3,1,3,3,2,3,3,3,3,3,0,3,3,3,2,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3];
+  const shades = ['var(--border-soft)', 'rgba(56,211,153,0.25)', 'rgba(56,211,153,0.55)', 'rgba(56,211,153,0.9)'];
+  pattern.forEach(level => {
+    const cell = document.createElement('div');
+    cell.className = 'cell';
+    cell.style.background = shades[level];
+    grid.appendChild(cell);
+  });
+
+  // Count-up stats on scroll into view
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const nums = document.querySelectorAll('.num[data-count]');
+  const countUp = (el) => {
+    const target = parseInt(el.dataset.count, 10);
+    const suffix = el.dataset.suffix || '';
+    if (reduceMotion) { el.textContent = target + suffix; return; }
+    let start = 0;
+    const duration = 900;
+    const startTime = performance.now();
+    const step = (now) => {
+      const p = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const statObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countUp(entry.target);
+        statObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+  nums.forEach(n => statObserver.observe(n));
+
+  // Timeline reveal on scroll
+  const tlItems = document.querySelectorAll('.tl-item');
+  const tlObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        tlObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  tlItems.forEach(item => tlObserver.observe(item));
+</script>
+
+</body>
+</html>

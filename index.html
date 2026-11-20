@@ -375,9 +375,53 @@
   footer p{font-family:var(--mono); font-size:12px; color:var(--text-faint);}
 
   @media (max-width:640px){
-    .contact-panel{padding:36px 22px;}
-    section{padding:64px 0;}
+    .wrap{padding-inline:20px;}
+    .hero{grid-template-columns:1fr;min-height:auto;padding-top:120px;padding-bottom:48px;gap:44px;}
+    .hero h1{font-size:40px;}
+    .hero p.lede{font-size:16px;}
+    .hero-ctas{display:grid;grid-template-columns:1fr 1fr;}
+    .hero-ctas .btn:first-child{grid-column:1/-1;justify-content:center;}
+    .stat-row{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;border:0;}
+    .stat{min-height:104px;padding:14px;border:1px solid var(--border-soft);border-radius:12px;background:rgba(17,24,39,.68);}
+    section{padding:64px 0!important;}
+    .section-head h2{font-size:32px;}
+    .about-grid,.cred-grid,.contact-panel{grid-template-columns:1fr!important;}
+    .about-grid>div:first-child{padding:24px;border:1px solid var(--border-soft);border-radius:var(--radius);background:var(--panel);}
+    .skills-grid,.kpi-grid{grid-template-columns:1fr 1fr;gap:10px;}
+    .skill-card{min-height:160px;padding:16px;}
+    .tag{font-size:10px;border-radius:999px;padding:4px 7px;}
+    .timeline{padding-left:0;display:grid;gap:12px;}
+    .timeline::before,.tl-item::before{display:none;}
+    .tl-item{padding:22px;border:1px solid var(--border-soft);border-radius:var(--radius);background:rgba(17,24,39,.72);}
+    .tl-bullets{grid-template-columns:1fr;}
+    .kpi-card{min-height:160px;padding:20px;}
+    .contact-panel{padding:32px 22px;text-align:left;}
+    .contact-panel p{margin:0 0 24px;}
+    .contact-links{justify-content:flex-start;}
   }
+
+  @media (max-width:980px){
+    .hero{grid-template-columns:1fr;min-height:auto;padding-top:140px;gap:44px;}
+    .hero>div:last-child{max-width:680px;width:100%;}
+  }
+
+  @media (max-width:520px){
+    .navlinks{padding-inline:20px;}
+    .skills-grid,.kpi-grid{grid-template-columns:1fr;}
+  }
+
+  /* Refined layout hierarchy */
+  body{background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 15% 5%,rgba(246,180,74,.08),transparent 26%),var(--bg);background-size:48px 48px,48px 48px,auto,auto;}
+  nav.wrap{height:72px;} .navlinks{gap:24px;} .navcta{border-radius:999px!important;padding:9px 15px!important;}
+  main section:not(.hero){padding-block:76px;} main section .divider{display:none;} .section-head h2{font-size:clamp(30px,4vw,42px);line-height:1.08;}
+  .hero h1{font-size:clamp(44px,6vw,68px);line-height:.98;} .hero p.lede{font-size:18px;line-height:1.72;} 
+  .stat-row{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;border:0;} .stat{min-height:112px;padding:16px;border:1px solid var(--border-soft);border-radius:14px;background:rgba(17,24,39,.68);}
+  .about-grid{grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:24px;} .about-grid>div:first-child{padding:36px;border:1px solid var(--border-soft);border-radius:var(--radius);background:var(--panel);}
+  .skills-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;} .skill-card{min-height:180px;background:rgba(17,24,39,.78);} .skill-card:hover{background:var(--panel);transform:translateY(-4px);} .tag{font-size:10.5px;border-radius:999px;padding:5px 8px;}
+  .timeline{padding-left:0;display:grid;gap:16px;} .timeline::before,.tl-item::before{display:none;} .tl-item{padding:28px;border:1px solid var(--border-soft);border-radius:var(--radius);background:rgba(17,24,39,.72);} .tl-bullets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px;}
+  .kpi-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;} .kpi-card{min-height:190px;display:flex;flex-direction:column;justify-content:space-between;} .kpi-card:nth-child(2){border-top:2px solid var(--good);} .kpi-card:nth-child(3){border-top:2px solid var(--accent);}
+  .cred-grid{grid-template-columns:1.25fr .75fr;gap:12px;} .cred-card{padding:24px;background:rgba(17,24,39,.78);}
+  .contact-panel{text-align:left;padding:48px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px;} .contact-panel .eyebrow{grid-column:1/-1;} .contact-panel h2{margin:0 0 8px;} .contact-panel p{margin:0;} .contact-links{justify-content:flex-end;}
 </style>
 </head>
 <body>
@@ -452,7 +496,7 @@
         <span class="eyebrow">Profile</span>
         <h2 style="margin:12px 0 20px;">Reliability is the product.</h2>
         <p>I'm a Site Reliability Engineer with <strong>8+ years</strong> across Retail, E-commerce, and BFSI, currently the <strong>SRE Lead and primary India POC</strong> for Sam's Club's in-club and e-commerce platforms at Walmart Global Tech. My work spans incident and problem management, hands-on production deployments, and Git-based release workflows for systems that can't afford downtime.</p>
-        <p>Over the last two years I've focused on closing the gap between operations and AI tooling — building a custom <strong>MCP integration with 8 tools</strong> and using hands-on LLM experience (Claude, GitHub Copilot, OpenAI) to automate incident triage, log analysis, and reporting that used to take a team hours to do manually.</p>
+        <p>Over the last two years I've focused on closing the gap between operations and AI tooling — building <strong>2 custom MCP servers with 12 purpose-built tools</strong> and using hands-on LLM experience (Claude, GitHub Copilot, OpenAI) to automate incident triage, log analysis, and reporting that used to take a team hours to do manually.</p>
       </div>
       <div class="now-card">
         <span class="eyebrow">Currently</span>
@@ -479,7 +523,7 @@
       <div class="skill-card">
         <div class="head"><h3>Cloud &amp; Platforms</h3><span class="status-pill"><i></i>Core</span></div>
         <div class="tag-row">
-          <span class="tag">Microsoft Azure</span><span class="tag">Walmart WCNP</span><span class="tag">Google Cloud</span>
+          <span class="tag">Microsoft Azure</span><span class="tag">Walmart WCNP</span><span class="tag">Google Cloud</span><span class="tag">Kubernetes (AKS)</span><span class="tag">Docker</span>
         </div>
       </div>
 
@@ -493,21 +537,21 @@
       <div class="skill-card">
         <div class="head"><h3>AI &amp; LLM Tools</h3><span class="status-pill"><i></i>Active</span></div>
         <div class="tag-row">
-          <span class="tag">Claude</span><span class="tag">GitHub Copilot</span><span class="tag">OpenAI</span><span class="tag">Windsurf</span><span class="tag">MCP Integration</span>
+          <span class="tag">Claude</span><span class="tag">GitHub Copilot</span><span class="tag">OpenAI</span><span class="tag">Windsurf</span><span class="tag">MCP Servers</span><span class="tag">Agent Skills</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="head"><h3>Version Control &amp; Deployments</h3><span class="status-pill"><i></i>Core</span></div>
         <div class="tag-row">
-          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">CI/CD Release Mgmt</span><span class="tag">Rollback Coordination</span>
+          <span class="tag">Git</span><span class="tag">GitHub</span><span class="tag">GitHub Actions</span><span class="tag">Azure DevOps</span><span class="tag">CI/CD Release Mgmt</span><span class="tag">Rollback Coordination</span>
         </div>
       </div>
 
       <div class="skill-card">
         <div class="head"><h3>Programming &amp; Automation</h3><span class="status-pill"><i></i>Core</span></div>
         <div class="tag-row">
-          <span class="tag">Core Java</span><span class="tag">Spring</span><span class="tag">Selenium</span><span class="tag">Shell Scripting</span>
+          <span class="tag">Core Java</span><span class="tag">Spring</span><span class="tag">Python</span><span class="tag">Selenium</span><span class="tag">Shell Scripting</span>
         </div>
       </div>
 
@@ -555,9 +599,9 @@
         <ul class="tl-bullets">
           <li>Serving as <b>SRE Lead and primary India POC</b>, owning reliability strategy and coordinating with global stakeholders across time zones.</li>
           <li>Acted as SME driving application stability, hands-on production releases, and operational excellence across in-club and e-commerce systems.</li>
-          <li>Built proactive Grafana/Splunk dashboards and alerts, reducing incident response time by <b>30%</b>.</li>
+          <li>Built proactive Grafana/OpenObserve dashboards and intelligent alerts, reducing incident response time by <b>30%</b>.</li>
           <li>Led resolution of <b>Sev1/Sev2</b> incidents, coordinating cross-functional CoE corrective and preventive actions.</li>
-          <li>Designed and built a custom <b>MCP server with 8 integrated tools</b>, using hands-on LLM development experience (Claude, GitHub Copilot, OpenAI) to automate incident triage, log analysis, and reporting.</li>
+          <li>Architected and deployed <b>2 MCP servers with 12 purpose-built tools</b>, using hands-on LLM development experience (Claude, GitHub Copilot, OpenAI) to automate incident triage, log analysis, and reporting.</li>
           <li>Owned hands-on deployments and <b>Git-based release workflows</b>, performing sanity validations and rollback coordination across production releases.</li>
           <li>Automated operational tasks using Selenium, Java, AI-assisted scripting, and MeshOS workflows, saving <b>35+ hours</b> of manual effort per month.</li>
           <li>Recognized with the <b>Walmart Bravo Award</b> for managing a critical production incident to successful resolution.</li>
@@ -566,7 +610,7 @@
 
       <div class="tl-item">
         <div class="tl-head">
-          <h3>Application L2/L3 Engineer</h3>
+          <h3>Application L2/L3 Engineer &amp; Functional SME</h3>
           <span class="tl-badge badge-eng">Batch &amp; Production Ops</span>
         </div>
         <div class="tl-meta">Tata Consultancy Services — Chennai · July 2018 – Aug 2022</div>
@@ -590,8 +634,8 @@
     </div>
     <div class="kpi-grid">
       <div class="kpi-card">
-        <div class="num">8 tools</div>
-        <div class="desc">Custom MCP server built to automate SRE workflows end-to-end, using hands-on LLM/AI experience.</div>
+        <div class="num">2 × 12</div>
+        <div class="desc">Two custom MCP servers to automate SRE workflows end-to-end, using hands-on LLM/AI experience.</div>
       </div>
       <div class="kpi-card">
         <div class="num">35+ hrs</div>
